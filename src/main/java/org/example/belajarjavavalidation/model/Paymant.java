@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.groups.ConvertGroup;
 import jakarta.validation.groups.Default;
 import org.example.belajarjavavalidation.grub.CreditCartPayment;
+import org.example.belajarjavavalidation.grub.CustomerPayment;
 import org.example.belajarjavavalidation.grub.PaymantGrub;
 import org.example.belajarjavavalidation.grub.VirtualAccountPaymant;
 import org.hibernate.validator.constraints.LuhnCheck;
@@ -34,13 +35,11 @@ public class Paymant {
 
     @NotNull (
             groups = {
-              VirtualAccountPaymant.class,
-              CreditCartPayment.class
+              CustomerPayment.class
             },
             message = "customers can't blank")
     @Valid
-    @ConvertGroup(from = VirtualAccountPaymant.class, to = Default.class)
-    @ConvertGroup(from = CreditCartPayment.class, to = Default.class)
+    @ConvertGroup(from = CustomerPayment.class, to = Default.class)
     private Customers customers;
 
 

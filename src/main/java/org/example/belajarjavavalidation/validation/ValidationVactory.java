@@ -1,10 +1,7 @@
 package org.example.belajarjavavalidation.validation;
 
 
-import jakarta.validation.ConstraintViolation;
-import jakarta.validation.Validation;
-import jakarta.validation.Validator;
-import jakarta.validation.ValidatorFactory;
+import jakarta.validation.*;
 
 import java.util.Set;
 
@@ -30,6 +27,23 @@ public class ValidationVactory<T>{
             return validator.validate(o, classes);
         }finally {
             validatorFactory.close();
+        }
+    }
+
+
+    public void validationWithException(Object o){
+        validator = validatorFactory.getValidator();
+        Set<ConstraintViolation<Object>> violations = validator.validate(o);
+        if(!violations.isEmpty()){
+            throw new ConstraintViolationException(violations);
+        }
+    }
+
+    public void validationWithExceptionWithGrub(Object o, Class<?>... classes){
+        validator = validatorFactory.getValidator();
+        Set<ConstraintViolation<Object>> violations = validator.validate(o, classes);
+        if(!violations.isEmpty()){
+            throw new ConstraintViolationException(violations);
         }
     }
 

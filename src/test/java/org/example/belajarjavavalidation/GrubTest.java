@@ -1,6 +1,9 @@
 package org.example.belajarjavavalidation;
 
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.ConstraintViolationException;
 import org.example.belajarjavavalidation.grub.CreditCartPayment;
+import org.example.belajarjavavalidation.grub.CustomerPayment;
 import org.example.belajarjavavalidation.grub.PaymantGrub;
 import org.example.belajarjavavalidation.grub.VirtualAccountPaymant;
 import org.example.belajarjavavalidation.model.Customers;
@@ -45,6 +48,26 @@ public class GrubTest {
     }
 
     @Test
+    void testValidationException() {
+        ValidationVactory<Paymant> paymantValidationVactory = new ValidationVactory<>();
+        Paymant paymant = new Paymant();
+
+        paymant.setMount(150_000L);
+        Customers customers = new Customers();
+        customers.setEmail("ahmadrendi");
+        paymant.setCustomers(customers);
+
+        try{
+//            if(!paymantValidationVactory.validaitonWithGrub(paymant, PaymantGrub.class).isEmpty()){
+//                throw new ConstraintViolationException(paymantValidationVactory.validaitonWithGrub(paymant, PaymantGrub.class));
+//            }
+           paymantValidationVactory.validationWithExceptionWithGrub(paymant, CustomerPayment.class);
+        }catch (ConstraintViolationException exception){
+            System.out.println(exception.getMessage());
+        }
+    }
+
+    @Test
     void testConversion() {
         ValidationVactory<Paymant> paymantValidationVactory = new ValidationVactory<>();
         Paymant paymant = new Paymant();
@@ -59,4 +82,8 @@ public class GrubTest {
             System.out.println(value.getMessage());
         }
     }
+
+
+
+
 }

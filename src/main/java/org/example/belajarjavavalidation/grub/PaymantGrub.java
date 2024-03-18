@@ -13,7 +13,8 @@ import jakarta.validation.groups.Default;
         value = {
                 Default.class,
                 VirtualAccountPaymant.class,
-                CreditCartPayment.class
+                CreditCartPayment.class,
+                CustomerPayment.class
         }
 )
 public interface PaymantGrub {
